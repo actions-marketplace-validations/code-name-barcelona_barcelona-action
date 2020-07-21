@@ -4,10 +4,14 @@ var path = require('path');
 var fs = require('fs');
 var es = require('event-stream');
 var http = require('https');
+const core = require('@actions/core');
+const github = require('@actions/github');
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 const run_id = process.env.GITHUB_RUN_ID
 
 var file_list = [];
+const dir = core.getInput('log-path');
+const octostoreEndpoint = core.getInput('octostore-endpoint');
 
 function fromDir(startPath,filter){
 
@@ -82,7 +86,7 @@ for (var i = 0; i < file_count; i++) {
                 console.log(data);
 
                 var options = {
-                    host: 'octostore.herokuapp.com',
+                    host: octostoreEndpoint,
                     path: `/octostore/${owner}-${repo}/${run_id}`,
                     method: 'POST',
                     headers: {

@@ -1,0 +1,28 @@
+{
+  "name": "octostore-action",
+  "version": "1.0.0",
+  "description": "Using actions to log metadata",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/machine-learning-apps/octostore-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/machine-learning-apps/octostore-action/issues"
+  },
+  "homepage": "https://github.com/machine-learning-apps/octostore-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "event-stream": "^4.0.1"
+  }
+}
