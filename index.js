@@ -1,5 +1,3 @@
-const dir = process.argv.slice(2)[0];
-
 var path = require('path');
 var fs = require('fs');
 var es = require('event-stream');
