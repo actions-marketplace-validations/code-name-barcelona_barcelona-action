@@ -3,7 +3,6 @@ var fs = require('fs');
 var es = require('event-stream');
 var http = require('https');
 const core = require('@actions/core');
-const github = require('@actions/github');
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 const run_id = process.env.GITHUB_RUN_ID
 
