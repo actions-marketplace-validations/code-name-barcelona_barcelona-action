@@ -59,16 +59,15 @@ for (var i = 0; i < file_count; i++) {
               totalLines++;
             //   console.log(line)
       
-              const regex = /^([^ ]+) ##\[debug\]\[octostore\]{([^:]*):([^:]*)}/
+              const regex = /^([^ ]+) ##\[debug\]\[octostore\](.*?)$/
               const matches = line.match(regex);
       
               if (matches != undefined) {
                 var this_time = new Date(matches[1]);
-                var field_name = matches[2];
-                var field_value = matches[3];
+                var log_value = matches[2];
       
                 var log_entry = {log_time: this_time}
-                log_entry[field_name] = field_value;
+                log_entry['log_body'] = log_value;
       
                 objects.push(log_entry);
               }
@@ -82,9 +81,15 @@ for (var i = 0; i < file_count; i++) {
                 var data = JSON.stringify(objectsFinal)
                 console.log(data);
 
+                octostore_endpoint = process.env.INPUT_OCTOSTORE_WRITER_ENDPOINT_LOCAL;
+                if(process.env.INPUT_OCTOSTORE_REMOTE==1)
+                {
+                  octostore_endpoint = process.env.INPUT_OCTOSTORE_WRITER_ENDPOINT_REMOTE
+                }
+                var urlpath = process.env.INPUT_OCTOSTORE_WRITER_PATH + process.env.INPUT_OCTOSTORE_AUTHENTICATION_CREDENTIAL;
                 var options = {
-                    host: octostoreEndpoint,
-                    path: `/octostore/${owner}-${repo}/${run_id}`,
+                    host: octostore_endpoint,
+                    path: urlpath,
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -110,7 +115,3 @@ for (var i = 0; i < file_count; i++) {
             }),
         );
 };
-  
-  
-
-
