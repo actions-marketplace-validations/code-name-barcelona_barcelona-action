@@ -1,14 +1,21 @@
 var path = require('path');
 var fs = require('fs');
 var es = require('event-stream');
-var http = require('https');
+var https = require('https');
+var http = require('http');
 const core = require('@actions/core');
+require('dotenv').config();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 const run_id = process.env.GITHUB_RUN_ID
 
 var file_list = [];
-const dir = core.getInput('log-path');
-const octostoreEndpoint = core.getInput('octostore-endpoint');
+const octostoreEndpointRemote = core.getInput('OCTOSTORE_WRITER_ENDPOINT_REMOTE');
+const octostoreEndpointLocal = core.getInput('OCTOSTORE_WRITER_ENDPOINT_LOCAL');
+const octostoreEndpointPort = core.getInput('OCTOSTORE_PORT');
+const urlpath = core.getInput('OCTOSTORE_WRITER_PATH');
+const azure_function_code  = core.getInput('OCTOSTORE_AUTHENTICATION_CREDENTIAL');
+const dir  = core.getInput('LOG_PATH');
+const run_locally = core.getInput('OCTOSTORE_LOCAL');
 
 function fromDir(startPath,filter){
 
@@ -81,20 +88,27 @@ for (var i = 0; i < file_count; i++) {
                 var data = JSON.stringify(objectsFinal)
                 console.log(data);
 
-                octostore_endpoint = process.env.INPUT_OCTOSTORE_WRITER_ENDPOINT_LOCAL;
-                if(process.env.INPUT_OCTOSTORE_REMOTE==1)
+                octostore_endpoint_var = octostoreEndpointRemote;
+                octostore_endpoint_port = 443;
+
+                var h = https;
+
+                if(run_locally==1)
                 {
-                  octostore_endpoint = process.env.INPUT_OCTOSTORE_WRITER_ENDPOINT_REMOTE
+                  octostore_endpoint_var = octostoreEndpointLocal;
+                  octostore_endpoint_port = octostoreEndpointPort;
+                  h = http;
                 }
-                var urlpath = process.env.INPUT_OCTOSTORE_WRITER_PATH + process.env.INPUT_OCTOSTORE_AUTHENTICATION_CREDENTIAL;
+                var fullpath = urlpath + azure_function_code;
                 var options = {
-                    host: octostore_endpoint,
-                    path: urlpath,
+                    host: octostore_endpoint_var,
+                    port: octostore_endpoint_port,
+                    path: fullpath,
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Content-Length': data.length
-                      }
+                      },
                   };
                   
                 callback = function(response) {
@@ -108,7 +122,7 @@ for (var i = 0; i < file_count; i++) {
                 });
                 }
                 
-                var req = http.request(options, callback);
+                var req = h.request(options, callback);
                 //This is the data we are posting, it needs to be a string or a buffer
                 req.write(data);
                 req.end();
