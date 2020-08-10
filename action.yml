@@ -1,11 +1,15 @@
 name: 'Octostore Action'
 description: 'Collect logged metadata and store it in octostore'
 inputs:
-  octostore-endpoint:  # id of input
-    description: 'If sending to your own hosted octostore'
-    required: false
-    default: 'octostore.herokuapp.com'
-  log-path:  # id of input
+  OCTOSTORE_WRITER_ENDPOINT_REMOTE:
+    description: 'POST endpoint for submitting your events to.'
+    required: true
+    default: 'octostore-azf.azurewebsites.net'
+  OCTOSTORE_WRITER_PATH:
+    description: 'Full path (including any code information) for submitting the information.'
+    required: true
+    default: '/api/octostore-writer?code='
+  LOG_PATH:  # id of input
     description: 'If using this for a separate log file outside of the actions log file'
     required: false
     default: '/home/runner/runners'
