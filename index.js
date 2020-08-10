@@ -4,6 +4,7 @@ var es = require('event-stream');
 var https = require('https');
 var http = require('http');
 const core = require('@actions/core');
+const { exit } = require('process');
 require('dotenv').config();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 const run_id = process.env.GITHUB_RUN_ID
@@ -11,7 +12,7 @@ const run_id = process.env.GITHUB_RUN_ID
 var file_list = [];
 const octostoreEndpointRemote = core.getInput('OCTOSTORE_WRITER_ENDPOINT_REMOTE');
 const octostoreEndpointLocal = core.getInput('OCTOSTORE_WRITER_ENDPOINT_LOCAL');
-const octostoreEndpointPort = core.getInput('OCTOSTORE_PORT');
+const octostoreEndpointPort = core.getInput('OCTOSTORE_LOCAL_PORT');
 const urlpath = core.getInput('OCTOSTORE_WRITER_PATH');
 const azure_function_code  = core.getInput('OCTOSTORE_AUTHENTICATION_CREDENTIAL');
 const dir  = core.getInput('LOG_PATH');
@@ -39,6 +40,11 @@ function fromDir(startPath,filter){
     };
 };
 
+if (azure_function_code == "")
+{
+  console.log("Please set a secret variable named 'OCTOSTORE_AUTHENTICATION_CREDENTIAL' with the Azure Function Code necessary to run.");
+  exit();
+} 
 
 fromDir(dir,'.log');
 console.log(file_list);
