@@ -4,7 +4,7 @@ inputs:
   BARCELONA_WRITER_ENDPOINT_REMOTE:
     description: 'POST endpoint for submitting your events to.'
     required: true
-    default: 'barcelona-azf.azurewebsites.net'
+    default: 'codename-barcelona-fxn-app.azurewebsites.net'
   BARCELONA_WRITER_PATH:
     description: 'Full path (including any code information) for submitting the information.'
     required: true
