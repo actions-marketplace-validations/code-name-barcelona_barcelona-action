@@ -3,10 +3,13 @@ This action will capture logged metadata and send it to the octostore
 
 ## Inputs
 
+``` 
+Example:
 http://contoso.com/api/filepath?code=<UUID>
 
 OCTOSTORE_WRITER_ENDPOINT_REMOTE: => contoso.com
 OCTOSTORE_WRITER_PATH: => /api/filepath?code=
+```
 
 ### `OCTOSTORE_WRITER_ENDPOINT_REMOTE`
 
