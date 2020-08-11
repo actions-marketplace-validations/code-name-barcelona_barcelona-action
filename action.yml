@@ -9,6 +9,9 @@ inputs:
     description: 'Full path (including any code information) for submitting the information.'
     required: true
     default: '/api/octostore-writer?code='
+  OCTOSTORE_AUTHENTICATION_CREDENTIAL:
+    description: 'Code to write to the Azure Function.'
+    required: true
   LOG_PATH:  # id of input
     description: 'If using this for a separate log file outside of the actions log file'
     required: false
