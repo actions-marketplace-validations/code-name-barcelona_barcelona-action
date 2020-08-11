@@ -1,4 +1,4 @@
-name: 'Octostore Action'
+name: 'Barcelona Action'
 description: 'Collect logged metadata and store it in barcelona'
 inputs:
   BARCELONA_WRITER_ENDPOINT_REMOTE:
