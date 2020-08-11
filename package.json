@@ -1,5 +1,5 @@
 {
-  "name": "octostore-action",
+  "name": "barcelona-action",
   "version": "1.0.0",
   "description": "Using actions to log metadata",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/machine-learning-apps/octostore-action.git"
+    "url": "git+https://github.com/machine-learning-apps/barcelona-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/machine-learning-apps/octostore-action/issues"
+    "url": "https://github.com/machine-learning-apps/barcelona-action/issues"
   },
-  "homepage": "https://github.com/machine-learning-apps/octostore-action#readme",
+  "homepage": "https://github.com/machine-learning-apps/barcelona-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0",

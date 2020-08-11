@@ -1,15 +1,15 @@
 name: 'Octostore Action'
-description: 'Collect logged metadata and store it in octostore'
+description: 'Collect logged metadata and store it in barcelona'
 inputs:
-  OCTOSTORE_WRITER_ENDPOINT_REMOTE:
+  BARCELONA_WRITER_ENDPOINT_REMOTE:
     description: 'POST endpoint for submitting your events to.'
     required: true
-    default: 'octostore-azf.azurewebsites.net'
-  OCTOSTORE_WRITER_PATH:
+    default: 'barcelona-azf.azurewebsites.net'
+  BARCELONA_WRITER_PATH:
     description: 'Full path (including any code information) for submitting the information.'
     required: true
-    default: '/api/octostore-writer?code='
-  OCTOSTORE_AUTHENTICATION_CREDENTIAL:
+    default: '/api/barcelona-writer?code='
+  BARCELONA_AUTHENTICATION_CREDENTIAL:
     description: 'Code to write to the Azure Function.'
     required: true
   LOG_PATH:  # id of input
